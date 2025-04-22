@@ -1,0 +1,36 @@
+{
+    "projets": [
+        {
+            "id": 0,
+            "cover": "/enhanced_room_1.png",
+            "after": "/enhanced_room_2.png",
+            "illustration": "photo d'illustration"
+        },
+        {
+            "id": 1,
+            "cover": "/projet_0.png",
+            "after": "/after_1.jpg",
+            "illustration": "photo d'illustration"
+        },
+        {
+            "id": 2,
+            "cover": "/projet_5.png",
+            "after": "/after_2.jpg",
+            "illustration": "photo d'illustration"
+        },
+        {
+            "id": 3,
+            "cover": "/projet_4.avif",
+            "after": "/after_3.jpg",
+            "illustration": "photo d'illustration"
+        },
+        {
+            "id": 4,
+            "cover": "/projet_3.jpg",
+            "after": "/after_4.jpg",
+            "illustration": "photo d'illustration"
+        }
+    ],
+    "description": "Mettez en valeur vos biens grâce à la rénovation numérique ! Nous transformons vos photos immobilières en intégrant des aménagements modernes, du mobilier et des améliorations architecturales en 3D.", 
+    "description2": "Offrez à vos clients une vision réaliste du potentiel d’un espace, qu’il soit vide ou à rénover. Attirez plus d’acheteurs et vendez plus rapidement grâce à des visuels percutants et immersifs."
+}

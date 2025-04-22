@@ -1,101 +1,101 @@
-import Image from "next/image";
+"use client";
+import Image from 'next/image';
+import Link from 'next/link';
+import imgAccueil from '../../public/visuel_accueil.webp'
+import logoVisuel from '../../public/logo_visuel.webp'
+import infoData from '../asset/info.json'
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+interface infoData {
+    projets:{
+      id: number;
+      cover: string;
+      illustration: string;
+    },
+    description: string;
+    description2: string;
 }
+
+gsap.registerPlugin(ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger)
+
+function App() {
+const imgRef = useRef(null)
+
+const ScrollToProjet = () => {
+  gsap.to(window, { duration: 2, scrollTo: { y: "#projet", offsetY: 0 } });
+}
+
+useEffect(() => {
+  const ctx = gsap.context(() => {
+    
+    gsap.to(imgRef.current, {
+      y: 400, 
+      ease: "none",
+      scrollTrigger: {
+        trigger: imgRef.current,
+        start: "top top",
+        end: "bottom top", 
+        scrub: true, 
+      },
+    });
+  });
+
+  
+  return () => ctx.revert(); // Nettoyage du contexte GSAP quand le composant se démonte
+}, []);
+
+const infoDescrip = infoData.description
+const infoDescrip2 = infoData.description2
+const dataInfo = infoData.projets.map((item, index) => {
+  return <Link href={"/projet"} className='relative w-[16%] h-[400px] mx-8 mt-4 mb-4 transition-all duration-200 hover:w-[20%] hover:mx-[0.42%] overflow-hidden' key={index}><div className='w-full'> {/*hover:mx-[-0.64%] pour 2k*/}
+        <Image className='object-cover min-w-[470px] ' src={item.cover} alt={item.illustration} fill />        
+  </div></Link>
+})
+  return (
+    <>
+    <main>
+    <div className='relative'>
+      <div  className='absolute top-[40%] left-[28%] z-10'>
+        <h1 className='text-4xl'>Reno-vision</h1>
+        <h2 className='ml-5 text-2xl'>La rénovation numérique</h2>
+      </div>
+      <div ref={imgRef} >
+        <Image src={imgAccueil} alt="image d'accueil" className='object-cover w-full h-[100vh]'/>
+      </div>
+      <div className='absolute top-[5%] right-[10%] z-10 flex flex-row text-[1.2rem]'>
+      <Link href="/projet"><p className='pr-2 z-10'>Offre |</p></Link>
+      <Link onClick={ScrollToProjet} href="#projet"><p className='z-10'>Projet</p></Link>
+      </div>
+    </div>
+    <div className='relative flex flex-row justify-center p-10 bg-white w-full'>
+      <Image src={logoVisuel} alt="logo" className='object-cover m-5 w-[15%] rounded-[40px] '/>
+      <p className='text-black text-1xl my-auto w-1/3'>{infoDescrip}<br/>{infoDescrip2}</p>
+    </div>
+    <div id='projet' className='relative bg-white w-full flex flex-wrap flex-row justify-center mx-auto z-12'>
+      {dataInfo}
+    </div>
+    </main>
+    <footer>
+      <div className='relative bg-black w-full text-white flex flex-col justify-center items-center'>
+        <div className='flex flex-row mt-10'>
+        <Image src={logoVisuel} alt="logo" className='object-cover w-[25%]'/>
+        <div className='flex flex-col'>
+        <p>Contact</p>
+        <Link href={"/pages/legale"} >Mentions légales</Link>
+        <Link href={"/pages/terms"} >CGU</Link>
+        <Link href={"/pages/privacy-policy"} >Politique de confidentialité</Link>
+        </div>
+        </div>
+        <p>© 2025 - Reno-vision</p>
+      </div>
+    </footer>
+    </>
+  )
+}
+
+export default App

@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }
@@ -18,4 +18,41 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+.dragger {
+  z-index: 2;
+  width: 2px;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 15px;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 50%;
+  right: auto;
+}
+
+.dragger-inner {
+  width: 1rem;
+  height: 5rem;
+  background-color: #ffffff;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  box-shadow: inset 0px 10px 15px -3px rgba(0, 0, 0, 0.3);
+  border: 2px solid #fff;
+}
+
+.clip_path {
+  -webkit-clip-path: inset(0 50% 0 0);
+  clip-path: inset(0 50% 0 0);
+}
+
+.aspect {
+  aspect-ratio: 16 / 9;
 }
